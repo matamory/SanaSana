@@ -3,13 +3,13 @@
 function AddSymptomCard() {
 
   return (
-    <>
-        <h2>Add a symptom</h2>
-        <p>Record a symptom and any details you want to remember about it.</p>
+    <article className="symptom-card">
+        <h2 className="card-heading">Add a symptom</h2>
+        <p className="card-description">Record a symptom and any details you want to remember about it.</p>
         <button>Add a new symptom</button>
-        <p>Takes about 2 minutes</p>
+        <p className="supporting-card-info">Takes about 2 minutes</p>
     
-    </>
+    </article>
   )
 }
 

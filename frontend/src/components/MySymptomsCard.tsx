@@ -3,14 +3,14 @@
 function MySymptomsCard() {
 
   return (
-    <>
+    <article className="symptom-card">
         
-        <h2>My Symptoms</h2>
-        <p>Browse your symptom entries by date and view their details.</p>
+        <h2 className="card-heading">My Symptoms</h2>
+        <p className="card-description">Browse your symptom entries by date and view their details.</p>
         <button>View my symptoms</button>
-        <p>View your full history</p>
+        <p className="supporting-card-info">View your full history</p>
     
-    </>
+    </article>
   )
 }
 
