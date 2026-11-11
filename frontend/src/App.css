@@ -1,6 +1,23 @@
+.navigation {
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; 
+  align-items: center;
+  /*padding: 1rem 3rem;*/
+}
+
+.navigation-links {
+  color: #898181c9;
+  font-size: 25px;
+  font-weight: 500;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 100px;
+}
 
 .brand-heading {
-  font-family: 'Roboto', sans-serif;
   font-size: 48px;
   font-weight: 600;
 }
