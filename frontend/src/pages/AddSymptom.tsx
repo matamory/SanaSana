@@ -1,5 +1,12 @@
 import { useState, type SyntheticEvent } from 'react'
 
+type ExistingSymptom = {
+    id: number
+    name:string
+    date:string
+    description: string | null
+}
+
 type AddSymptomProps = {
     setCurrentPage: (page:string) => void
     symptomName: string
@@ -18,6 +25,8 @@ function AddSymptom({setCurrentPage, symptomName, setSymptomName, date, setDate,
     const [nameError, setNameError] = useState(false)
 
     const [apiError, setApiError] = useState('')
+
+    const [duplicateSymptom, setDuplicateSymptom] = useState<ExistingSymptom | null>(null)
 
     async function handleSubmit(event:  SyntheticEvent<HTMLFormElement>) {
         event.preventDefault()
@@ -42,7 +51,8 @@ function AddSymptom({setCurrentPage, symptomName, setSymptomName, date, setDate,
             })
 
             if (response.status === 409) {
-                setApiError('A symptom with this name and date already exists.')
+                const data = await response.json()
+                setDuplicateSymptom(data.detail)
                 return
             }
 
@@ -64,13 +74,38 @@ function AddSymptom({setCurrentPage, symptomName, setSymptomName, date, setDate,
 
     return (
     <>
-        <button className="backtrack-button" onClick={() => setCurrentPage('home')}>Return to Home</button>
+        <button className="backtrack-button" onClick={() => setCurrentPage('home')}> &larr; Return to Home</button>
         <section className="add">
           <h1 className="add-heading">Add a Symptom</h1>
           <p className="add-paragraph">Record what you expereienced. Only symptom name and date are required.</p>
         </section>
         <section>
             <form onSubmit={handleSubmit}>
+                {duplicateSymptom && (
+                    <div className="duplicate-warning">
+                        <h2>Duplicate Symptom</h2>
+                        <p>
+                            You already have an entry for {duplicateSymptom.name} on {duplicateSymptom.date}.
+                        </p>
+                        <button
+                            type="button"
+                            onClick={() => {
+                                setSymptomName(duplicateSymptom.name)
+                                setDate(duplicateSymptom.date)
+                                setDescription(duplicateSymptom.description ?? '')
+                                setCurrentPage('symptom-details')
+                            }}
+                        >
+                            View Existing Entry
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() => setDuplicateSymptom(null)}
+                        >
+                            Cancel
+                        </button>
+                    </div>
+                )}
                 <label htmlFor="symptom-name">Symptom name</label>
                 <input id="symptom-name" type="text" value={symptomName} 
                     onChange={(event) =>  {
@@ -87,7 +122,7 @@ function AddSymptom({setCurrentPage, symptomName, setSymptomName, date, setDate,
                 <textarea id="description" value={description} onChange={(event) => setDescription(event.target.value)}></textarea>
                 {apiError && <p>{apiError}</p>}
 
-                <button type="submit">Save</button>
+                <button type="submit">Save Symptom</button>
                 <button type="button" onClick={() => setCurrentPage('home')}>Cancel</button>
             </form>
         </section>

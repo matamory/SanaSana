@@ -65,7 +65,13 @@ def create_symptom(symptom: SymptomCreate, db: Session = Depends(get_db)):
     if existing:
         raise HTTPException(
             status_code=409,
-            detail="A symptom with this name and date already exists"
+            detail={
+            "message": "A symptom with this name and date already exists",
+            "id": existing.id,
+            "name": existing.name,
+            "date": str(existing.date),
+            "description": existing.description
+        }
         )
 
     new_symptom = Symptom(

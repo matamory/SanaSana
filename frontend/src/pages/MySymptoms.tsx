@@ -51,7 +51,7 @@ function MySymptoms({ setCurrentPage, setSymptomName, setDate, setDescription}: 
 
   return (
     <>
-        <button className="backtrack-button" onClick={() => setCurrentPage('home')}>Return to Home</button>
+        <button className="backtrack-button" onClick={() => setCurrentPage('home')}> &larr; Return to Home</button>
         <section className="symptoms">
           <h1 className="symptoms-heading">My Symptoms</h1>
           <p className="symptoms-paragraph">Select any entry to view its details.</p>
@@ -59,7 +59,15 @@ function MySymptoms({ setCurrentPage, setSymptomName, setDate, setDescription}: 
         {error && <p>{error}</p>}
 
         {!error && symptoms.length === 0 ? (
-            <p>You don't have any symptom entries yet.</p>
+            <>
+            <h2>Ready to record your first symptom? Getting started is easy:</h2>
+            <h4><ol>
+                <li>Select “Add a symptom </li>
+                <li>Enter your symptom name, date and any optional details</li>
+                <li>Select “Save Symptom” to record your entry</li>
+            </ol>
+            </h4>
+            </>
         ) : (
         symptoms.map ((symptom) => (
             <article key={symptom.id}>

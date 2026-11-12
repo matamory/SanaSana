@@ -10,7 +10,7 @@ function SymptomDetails({symptomName, date, description, setCurrentPage}: Sympto
 
   return (
     <>
-        <button className="backtrack-button" onClick={() => setCurrentPage('my-symptoms')}>Return to My Symptoms</button>
+        <button className="backtrack-button" onClick={() => setCurrentPage('my-symptoms')}> &larr; Return to My Symptoms</button>
         <section className="details">
           <h1 className="details-heading">Symptom Details</h1>
           <h2>{symptomName}</h2>
