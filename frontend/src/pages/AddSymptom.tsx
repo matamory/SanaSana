@@ -1,18 +1,18 @@
-
 import { useState } from 'react'
+
 type AddSymptomProps = {
     setCurrentPage: (page:string) => void
+    symptomName: string
+    setSymptomName: (name:string) => void
+    date: string
+    setDate: (date:string) => void
+    description: string
+    setDescription: (description:string) => void
 }
 
 
-function AddSymptom({setCurrentPage}: AddSymptomProps) {
-    const [symptomName, setSymptomName] = useState('')
-
-    const today = new Date()
-    const localDate = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`
-    const [date, setDate] = useState(localDate)
-   
-    const [description, setDescription] = useState('')
+function AddSymptom({setCurrentPage, symptomName, setSymptomName, date, setDate, description, setDescription}: AddSymptomProps) {
+    
 
     //error state
     const [nameError, setNameError] = useState(false)
@@ -23,11 +23,13 @@ function AddSymptom({setCurrentPage}: AddSymptomProps) {
             setNameError(true)
             return
         }
+        setCurrentPage('symptom-details')
         console.log(symptomName, date, description)
     }
 
     return (
     <>
+        <button className="backtrack-button" onClick={() => setCurrentPage('home')}>Return to Home</button>
         <section className="add">
           <h1 className="add-heading">Add a Symptom</h1>
           <p className="add-paragraph">Record what you expereienced. Only symptom name and date are required.</p>
@@ -49,7 +51,7 @@ function AddSymptom({setCurrentPage}: AddSymptomProps) {
                 <label htmlFor="description">Description</label>
                 <textarea id="description" value={description} onChange={(event) => setDescription(event.target.value)}></textarea>
                 <button>Save</button>
-                <button onClick={() => setCurrentPage('home')}>Cancel</button>
+                <button type="button" onClick={() => setCurrentPage('home')}>Cancel</button>
             </form>
         </section>
     
