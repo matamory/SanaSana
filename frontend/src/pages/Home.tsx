@@ -2,8 +2,11 @@
 import AddSymptomCard from '../components/AddSymptomCard.tsx'
 import MySymptomsCard from '../components/MySymptomsCard.tsx'
 
+type HomeProps = {
+    setCurrentPage: (page: string) => void
+}
 
-function Home() {
+function Home({ setCurrentPage }: HomeProps) {
 
   return (
     <>
@@ -13,8 +16,12 @@ function Home() {
         </section>
 
         <section className="symptom-cards">
-        <AddSymptomCard />
-        <MySymptomsCard />
+        <AddSymptomCard
+          setCurrentPage={setCurrentPage} 
+        />
+        <MySymptomsCard
+          setCurrentPage={setCurrentPage} 
+        />
         </section>
     
     </>
