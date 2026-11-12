@@ -56,9 +56,10 @@ function App() {
 
       {currentPage === 'my-symptoms' && 
         <MySymptoms 
-          setCurrentPage={setCurrentPage}
-          symptomName={symptomName}
-          date={date}
+          setCurrentPage={setCurrentPage}      
+          setSymptomName={setSymptomName}
+          setDate={setDate}
+          setDescription={setDescription}
         />
       }
     </>
